@@ -129,5 +129,88 @@ const userBD = { username: 'joao', password: '123s' };
 console.log(verifyUser(user, userBD)); */
 
 // type assertion
-const body = document.querySelector('body') as HTMLBodyElement;
-body.style.background = 'red';
+// const body = document.querySelector('body') as HTMLBodyElement;
+// body.style.background = 'red';
+
+// class Escritor {
+//   private _nome: string;
+
+//   private _ferramenta: Ferramenta | null = null;
+
+//   constructor(nome: string) {
+//     this._nome = nome;
+//   }
+
+//   get nome(): string {
+//     return this._nome;
+//   }
+
+//   set ferramenta(ferramenta: Ferramenta | null) {
+//     this._ferramenta = ferramenta
+//   }
+
+//   get ferramenta(): Ferramenta | null {
+//     return this._ferramenta;
+//   }
+
+//   escrever(): void {
+//     if (this._ferramenta === null) {
+//       console.log('Não posso escrver sem ferramenta');
+//       return;
+//     }
+//     this._ferramenta.escrever();
+//   }
+// }
+
+// abstract class Ferramenta {
+//   private _nome: string;
+
+//   constructor(nome: string) {
+//     this._nome = nome;
+//   }
+
+//   get nome(): string {
+//     return this._nome;
+//   }
+
+//   abstract escrever(): void;
+// }
+
+// class Caneta extends Ferramenta {
+//   escrever(): void {
+//     console.log(`${this.nome} está escrvendo`);
+//   }
+// }
+
+// const escritor = new Escritor('João');
+// const caneta = new Caneta('Bic');
+// escritor.ferramenta = caneta;
+// console.log(escritor.escrever());
+class CarrinhoDeCompras {
+  private readonly produtos: Produto[] = [];
+
+  inserirProdutos(...produtos: Produto[]): void {
+    for (const produto of produtos) {
+      this.produtos.push(produto);
+    }
+  }
+
+  quantidade(): number {
+    return this.produtos.length;
+  }
+
+  valorTotal(): number {
+    return this.produtos.reduce((soma, produto) => soma + produto.preco, 0);
+  }
+}
+
+class Produto {
+  constructor(public nome: string, public preco: number) {}
+}
+
+const produto1 = new Produto('Camiseta', 20.0);
+const produto2 = new Produto('Calça', 20.0);
+const carrinho = new CarrinhoDeCompras();
+carrinho.inserirProdutos(produto1, produto2);
+console.log(carrinho.quantidade());
+console.log(carrinho.valorTotal());
