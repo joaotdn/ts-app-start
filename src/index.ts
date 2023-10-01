@@ -186,31 +186,183 @@ console.log(verifyUser(user, userBD)); */
 // const caneta = new Caneta('Bic');
 // escritor.ferramenta = caneta;
 // console.log(escritor.escrever());
-class CarrinhoDeCompras {
-  private readonly produtos: Produto[] = [];
+// class CarrinhoDeCompras {
+//   private readonly produtos: Produto[] = [];
 
-  inserirProdutos(...produtos: Produto[]): void {
-    for (const produto of produtos) {
-      this.produtos.push(produto);
-    }
-  }
+//   inserirProdutos(...produtos: Produto[]): void {
+//     for (const produto of produtos) {
+//       this.produtos.push(produto);
+//     }
+//   }
 
-  quantidade(): number {
-    return this.produtos.length;
-  }
+//   quantidade(): number {
+//     return this.produtos.length;
+//   }
 
-  valorTotal(): number {
-    return this.produtos.reduce((soma, produto) => soma + produto.preco, 0);
-  }
-}
+//   valorTotal(): number {
+//     return this.produtos.reduce((soma, produto) => soma + produto.preco, 0);
+//   }
+// }
 
-class Produto {
-  constructor(public nome: string, public preco: number) {}
-}
+// class Produto {
+//   constructor(public nome: string, public preco: number) {}
+// }
 
-const produto1 = new Produto('Camiseta', 20.0);
-const produto2 = new Produto('Calça', 20.0);
-const carrinho = new CarrinhoDeCompras();
-carrinho.inserirProdutos(produto1, produto2);
-console.log(carrinho.quantidade());
-console.log(carrinho.valorTotal());
+// const produto1 = new Produto('Camiseta', 20.0);
+// const produto2 = new Produto('Calça', 20.0);
+// const carrinho = new CarrinhoDeCompras();
+// carrinho.inserirProdutos(produto1, produto2);
+// console.log(carrinho.quantidade());
+// console.log(carrinho.valorTotal());
+
+// function add(n: unknown, b: unknown): number | string {
+//   return typeof n === 'number' && typeof b === 'number' ? n + b : `${n}${b}`;
+// }
+// console.log(add(1, 5));
+// console.log(add('a', 'b'));
+
+// type Pessoa = { tipo: 'pessoa'; nome: string };
+// type Animal = { tipo: 'animal'; cor: string };
+// type PessoaOuAnimal = Pessoa | Animal;
+
+// class Aluno implements Pessoa {
+//   tipo: 'pessoa' = 'pessoa';
+//   constructor(public nome: string) {}
+// }
+
+// function mostranome(obj: PessoaOuAnimal): void {
+//   // if ('nome' in obj) console.log(obj.nome);
+//   // if (obj instanceof Aluno) console.log(obj.nome);
+//   switch(obj.tipo) {
+//     case 'pessoa':
+//       console.log(obj.nome);
+//       return;
+//     case 'animal':
+//       console.log(obj.cor);
+//       return;
+//   }
+// }
+
+// mostranome(new Aluno('João'));
+// mostranome({ tipo: 'animal', cor: 'Rosa' });
+
+// type CoresObj = typeof coresObj;
+// type CoresKeys = keyof CoresObj;
+
+// const coresObj = {
+//   red: 'vermelho',
+//   green: 'Verde',
+//   blue: 'Azul',
+//   purple: 'Roxo',
+// }
+
+// function translateColors(color: CoresKeys, colors: CoresObj): string {
+//   return colors[color];
+// }
+
+// console.log(translateColors('red', coresObj));
+// console.log(translateColors('green', coresObj));
+// console.log(translateColors('blue', coresObj));
+// console.log(translateColors('purple', coresObj));
+
+// type Veiculo = {
+//   marca: string;
+//   ano: number,
+// }
+
+// type Car = {
+//   brand: Veiculo['marca'];
+//   year: Veiculo['ano'];
+//   name: string;
+// }
+
+// const carro: Car = {
+//   brand: 'Ford',
+//   year: 2020,
+//   name: 'Corsa'
+// }
+
+// console.log(carro);
+
+// class Calculator {
+//   constructor(public number: number) {}
+
+//   add(n: number): this {
+//     this.number += n;
+//     return this;
+//   }
+
+//   sub(n: number): this {
+//     this.number -= n;
+//     return this;
+//   }
+
+//   div(n: number): this {
+//     this.number /= n;
+//     return this;
+//   }
+
+//   mul(n: number): this {
+//     this.number *= n;
+//     return this;
+//   }
+// }
+
+// class subCalculator extends Calculator {
+//   pow(n: number): this {
+//     this.number **= n;
+//     return this;
+//   }
+// }
+
+// const calc = new subCalculator(10);
+// console.log(calc.add(5).mul(2).div(2).sub(1).pow(2));
+
+// // Builder Pattern
+// class RequestBuilder {
+//   private method: 'get' | 'post' | null = null;
+//   private url: string | null = null;
+
+//   setMethod(method: 'get' | 'post'): this {
+//     this.method = method;
+//     return this;
+//   }
+
+//   setUrl(url: string): this {
+//     this.url = url;
+//     return this;
+//   }
+
+//   send():void {
+//     console.log(`Sending ${this.method} from ${this.url}`);
+//   }
+// }
+
+// const req = new RequestBuilder();
+// req.setMethod('post').setUrl('http://api.com').send();
+
+// type Adder = {
+//   (x: number): number;
+//   (x: number, y: number): number;
+//   (...arg: number[]): number;
+// };
+
+// const adder: Adder = (x: number, y?: number, ...arqs: number[]) => {
+//   if (arqs.length > 0) return arqs.reduce((s, v) => s + v, 0) + x + (y || 0);
+//   return x + (y || 0);
+// };
+
+// console.log(adder(1, 2, 3, 4, 5));
+
+type Documento = {
+  titulo: string;
+  texto: string;
+  data?: Date;
+};
+
+const doc: Documento = {
+  titulo: 'O titulo',
+  texto: 'O texto',
+};
+
+console.log(doc.data?.toDateString() ?? 'Coalescencia nula');
