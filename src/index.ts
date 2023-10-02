@@ -11,6 +11,8 @@ const person: { name: string; age: number; adulto?: boolean } = {
 };
 console.log(person); */
 
+// import { AppNamespace } from './mdule';
+
 /* function noReturn(...args: string[]): void {
   console.log(args.join(' '));
 }
@@ -354,15 +356,693 @@ console.log(verifyUser(user, userBD)); */
 
 // console.log(adder(1, 2, 3, 4, 5));
 
-type Documento = {
-  titulo: string;
-  texto: string;
-  data?: Date;
-};
+// type Documento = {
+//   titulo: string;
+//   texto: string;
+//   data?: Date;
+// };
 
-const doc: Documento = {
-  titulo: 'O titulo',
-  texto: 'O texto',
-};
+// const doc: Documento = {
+//   titulo: 'O titulo',
+//   texto: 'O texto',
+// };
 
-console.log(doc.data?.toDateString() ?? 'Coalescencia nula');
+// console.log(doc.data?.toDateString() ?? 'Coalescencia nula');
+// type FilterCall<U> = (value: U, index?: number, array?: U[]) => boolean;
+
+// function myFilter<T>(array: T[], callbackfn: FilterCall<T>): T[] {
+//   const newArray = [];
+//   for (let i = 0; i < array.length; i++) {
+//     if (callbackfn(array[i])) {
+//       newArray.push(array[i]);
+//     }
+//   }
+//   return newArray;
+// }
+
+// const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const filtered = myFilter(array, (value) => value < 5);
+// console.log(filtered);
+// interface PessoaProtocolo<T = string, U = number> {
+//   nome: T;
+//   sobrenome: T;
+//   idade: U;
+// }
+
+// const aluno: PessoaProtocolo<string, number> = {
+//   nome: 'Joao',
+//   sobrenome: 'Teodoro',
+//   idade: 37,
+// };
+
+// const aluno2: PessoaProtocolo = {
+//   nome: 'Luis',
+//   sobrenome: 'Henrique',
+//   idade: 32,
+// };
+
+// console.log(aluno, aluno2);
+
+// restrição em generics
+// type ObterChave = <O, K extends keyof O>(obj: O, key: K) => O[K];
+
+// const getKey: ObterChave = (obj, key) => obj[key];
+
+// const animal = {
+//   cor: 'rosa',
+//   vacina: ['V1', 'V2'],
+// };
+
+// const vac = getKey(animal, 'vacina');
+// const cor = getKey(animal, 'cor');
+
+// console.log(vac, cor);
+
+// Generics com classes
+// class Pessoa<T, U> {
+//   constructor(public nome: T, public idade: U) {}
+// }
+
+// // Estrutura de dados PILHA
+// class Pilha<T> {
+//   private contador = 0;
+//   private elementos: { [k: number]: T } = {};
+
+//   push(elemento: T): void {
+//     this.elementos[this.contador] = elemento;
+//     this.contador++;
+//   }
+
+//   pop(): T | void {
+//     if (this.isEmpty()) return undefined;
+
+//     this.contador--;
+//     const elemento = this.elementos[this.contador];
+//     delete this.elementos[this.contador];
+//     return elemento;
+//   }
+
+//   isEmpty(): boolean {
+//     return this.contador === 0;
+//   }
+
+//   length(): number {
+//     return this.contador;
+//   }
+
+//   show(): void {
+//     for (const k in this.elementos) {
+//       console.log(this.elementos[k]);
+//     }
+//   }
+// }
+
+// const p = new Pilha<number>();
+// p.push(1);
+// p.push(2);
+// p.push(3);
+// p.push(4);
+// const e = p.pop();
+// console.log(p, e);
+// function union<O1, O2>(obj1: O1, obj2: O2): O1 & O2 {
+//   return { ...obj1, ...obj2 };
+// }
+
+// const obj1 = { k1: 'v1' };
+// const obj2 = { k2: 'v2' };
+// const u = union(obj1, obj2);
+// console.log(u);
+
+// PREDICATE
+// function isNumber(value: unknown): value is number {
+//   return typeof value === 'number';
+// }
+
+// function sum<T>(...args: T[]): number {
+//   const result = args.reduce((s, v) => {
+//     if (isNumber(s) && isNumber(v)) {
+//       return s + v;
+//     }
+//     return s;
+//   }, 0);
+//   return result;
+// }
+
+// console.log(sum(1, 2, 3));
+// console.log(sum(...[1, 2, 3, 'a', 'b', 4]));
+// console.log(sum('a', 'b'));
+
+// RECORD
+// const obj1: Record<string, string | number> = {
+//   nome: 'Luiz',
+//   sobrenome: 'Miranda',
+//   udade: 30,
+// };
+// console.log(obj1);
+
+// // REQUIRED = torna as propiedades opcionais em obrigatorias
+// type PessoaProtocolo = {
+//   nome?: string;
+//   idade?: number;
+// };
+
+// type PessoaRequired = Required<PessoaProtocolo>;
+
+// const pessoa1: PessoaRequired = {
+//   nome: 'Joao',
+//   idade: 37,
+// };
+// console.log(pessoa1);
+
+// // Partial
+// type PessoaPartial = Partial<PessoaRequired>; // transforma campos obrigatorios em requeridos
+// // Readonly
+// type pessoaReadOnly = Readonly<PessoaRequired>; // propriedades imutaveis apenas leitura
+// // Pick
+// type PessoaPick = Pick<PessoaRequired, 'nome'>; // pega apenas os campos marcados
+
+// const pessoaPick: PessoaPick = {
+//   nome: 'Joao',
+// };
+// console.log(pessoaPick);
+
+// type ABC = 'A' | 'B' | 'C';
+// type CDE = 'C' | 'D' | 'E';
+// type TipoExclude = Exclude<ABC, CDE>;
+// type TipoExtract = Extract<ABC, CDE>;
+
+// type AccountMongo = {
+//   _id: string;
+//   nome: string;
+//   idade: number;
+// };
+
+// type AccountApi = Pick<AccountMongo, Exclude<keyof AccountMongo, '_id'>> & {
+//   id: string;
+// };
+
+// const accountMongo: AccountMongo = {
+//   _id: 'apsdpaiosydpiasud',
+//   nome: 'Joao',
+//   idade: 37,
+// };
+
+// function mapAccount(accountMongo: AccountMongo): AccountApi {
+//   const { _id, ...data } = accountMongo;
+//   return { ...data, id: _id };
+// }
+
+// const api = mapAccount(accountMongo);
+// console.log(api);
+
+// type VotationOpts = {
+//   qtdVts: number;
+//   opt: string;
+// };
+
+// class Votation {
+//   private _opts: VotationOpts[] = [];
+//   constructor(public anwser: string) {}
+
+//   addOpt(opt: VotationOpts): void {
+//     this._opts.push(opt);
+//   }
+
+//   vote(index: number): void {
+//     if (!this._opts[index]) return;
+//     this._opts[index].qtdVts++;
+//   }
+
+//   get opts(): VotationOpts[] {
+//     return this._opts;
+//   }
+// }
+
+// class app {
+//   private votes: Votation[] = [];
+//   addVotation(votation: Votation): void {
+//     this.votes.push(votation);
+//   }
+
+//   showVotations(): void {
+//     for (const votation of this.votes) {
+//       console.log(votation.anwser);
+//       for (const opts of votation.opts) {
+//         console.log(opts.opt, opts.qtdVts);
+//       }
+//       console.log('###');
+//       console.log('');
+//     }
+//   }
+// }
+
+// const v1 = new Votation('Qual sua linguagem de programação favorita?');
+// v1.addOpt({ opt: 'Pyton', qtdVts: 0 });
+// v1.addOpt({ opt: 'JS', qtdVts: 0 });
+// v1.addOpt({ opt: 'PHP', qtdVts: 0 });
+
+// v1.vote(0);
+// v1.vote(0);
+// v1.vote(0);
+// v1.vote(1);
+// v1.vote(1);
+// v1.vote(2);
+// v1.vote(2);
+// v1.vote(0);
+
+// const votesApp = new app();
+// votesApp.addVotation(v1);
+// votesApp.showVotations();
+
+// const v2 = new Votation('Qual sua cor favorita?');
+// v2.addOpt({ opt: 'Vermelha', qtdVts: 0 });
+// v2.addOpt({ opt: 'Azul', qtdVts: 0 });
+// v2.addOpt({ opt: 'Verde', qtdVts: 0 });
+
+// v2.vote(0);
+// v2.vote(1);
+// v2.vote(1);
+// v2.vote(1);
+// v2.vote(0);
+// v2.vote(0);
+// v2.vote(2);
+// v2.vote(2);
+
+// const colorApp = new app();
+// colorApp.addVotation(v2);
+// colorApp.showVotations();
+
+// DECORATORS
+// função que finge ser o objeto da classe, mas fazem alguma coisa antes de entregar o objeto
+
+// @decorator
+// class Animal {
+//   constructor(public nome: string, public cor: string) {}
+// }
+
+// function decorator<T extends new (...args: any[]) => any>(target: T): T {
+//   return class extends target {
+//     constructor(...args: any[]) {
+//       super(...args);
+//       this.nome = this.invert(args[0]);
+//       this.cor = this.invert(args[1]);
+//     }
+
+//     invert(value: string): string {
+//       return value.split('').reverse().join('');
+//     }
+//   };
+// }
+
+// const animal = new Animal('cachorro', 'roxo');
+// console.log(animal);
+
+// interface Constructor {
+//   new (...args: any[]): any;
+// }
+
+// function lowercaseDecorator(param1: string, param2: string) {
+//   return function (target: Constructor) {
+//     return class extends target {
+//       firstname: string;
+//       lastname: string;
+
+//       constructor(...args: any[]) {
+//         super(...args);
+//         this.firstname = `${param1}: ${this.lowercase(args[0])}`;
+//         this.lastname = `${param2}: ${this.lowercase(args[1])}`;
+//       }
+
+//       lowercase(value: string): string {
+//         return value.toLowerCase();
+//       }
+//     };
+//   };
+// }
+
+// function uppercaseDecorator(param1: string, param2: string) {
+//   return function (target: Constructor) {
+//     return class extends target {
+//       firstname: string;
+//       lastname: string;
+
+//       constructor(...args: any[]) {
+//         super(...args);
+//         this.firstname = `${param1}: ${this.uppercase(args[0])}`;
+//         this.lastname = `${param2}: ${this.uppercase(args[1])}`;
+//       }
+
+//       uppercase(value: string): string {
+//         return value.toUpperCase();
+//       }
+//     };
+//   };
+// }
+
+// @lowercaseDecorator('Nome', 'Sobrenome')
+// @uppercaseDecorator('Nome', 'Sobrenome')
+// class People {
+//   constructor(public firstname: string, public lastname: string) {}
+// }
+
+// const p = new People('João', 'Teodoro');
+// console.log(p.firstname, p.lastname);
+
+// function decorator(
+//   classPrototype: any,
+//   nomeMetodo: string,
+//   descriptor: PropertyDescriptor,
+// ): PropertyDescriptor {
+//   console.log(classPrototype);
+//   console.log(nomeMetodo);
+//   console.log(descriptor);
+//   return {
+//     value: function (...args: string[]) {
+//       return args[0];
+//     },
+//   };
+// }
+
+// class Pessoa {
+//   nome: string;
+//   sobrenome: string;
+//   idade: number;
+
+//   constructor(nome: string, sobrenome: string, idade: number) {
+//     this.nome = nome;
+//     this.sobrenome = sobrenome;
+//     this.idade = idade;
+//   }
+
+//   @decorator
+//   fullname(msg: string): string {
+//     return `${msg}: ${this.nome} ${this.sobrenome}`;
+//   }
+// }
+
+// const p = new Pessoa('João', 'Teodoro', 37);
+// p.fullname('Nome: ');
+
+// function decorator(
+//   classPrototype: any,
+//   nameMethod: string | symbol,
+//   index: number,
+// ): any {
+//   console.log(classPrototype);
+//   console.log(nameMethod);
+//   console.log(index);
+//   return 'anything';
+// }
+
+// function attrDecorator(classPrototype: any, name: string | symbol): any {
+//   let propertyValue: any;
+//   return {
+//     get: () => propertyValue,
+//     set: (value: any) => {
+//       if (typeof value === 'string') {
+//         propertyValue = value.split('').reverse().join('');
+//         return;
+//       }
+//       propertyValue = value;
+//     },
+//   };
+// }
+
+// class People {
+//   @attrDecorator
+//   firstname: string;
+//   @attrDecorator
+//   lastname: string;
+//   @attrDecorator
+//   age: number;
+
+//   constructor(firstname: string, lastname: string, age: number) {
+//     this.firstname = firstname;
+//     this.lastname = lastname;
+//     this.age = age;
+//   }
+
+//   getFullname(header: string): string {
+//     return `${header}: ${this.firstname} ${this.lastname} - ${this.age} anos`;
+//   }
+// }
+
+// const people = new People('Joao', 'Teodoro', 37);
+// console.log(people.getFullname('Nome: '));
+
+// // Tipo do construtor da classe
+// type Constructor = new (...args: any[]) => any;
+
+// // Classes
+// function decoradorDeClasse(construtor: Constructor): any {
+//   // Chamado na criação da classe
+//   console.log('CLASSE');
+//   console.log(construtor);
+//   console.log('###');
+
+//   // Retorno pode ser omitido
+//   return class extends construtor {
+//     // faça o que desejar
+//   };
+// }
+
+// // Método de instância (normal)
+// function decoradorDeMetodo(
+//   prototipoDaClasse: any,
+//   nomeDoMetodo: string,
+//   descritorDePropriedade: PropertyDescriptor,
+// ): any {
+//   // Chamado na criação do método (não precisa chamar o método)
+//   console.log('MÉTODO NORMAL');
+//   console.log(prototipoDaClasse);
+//   console.log(nomeDoMetodo);
+//   console.log(descritorDePropriedade);
+//   console.log('###');
+
+//   // Retorno pode ser omitido
+//   return {
+//     // value altera o retorno original:
+//     // value: (...args: any[]) => console.log(args),
+//     writable: true,
+//     enumerable: true,
+//     configurable: true,
+//   };
+// }
+
+// // Método estático
+// function decoradorDeMetodoEstatico(
+//   classConstructor: Constructor,
+//   nomeDoMetodo: string,
+//   descritorDePropriedade: PropertyDescriptor,
+// ): any {
+//   // Chamado na criação do método (não precisa chamar o método)
+//   console.log('MÉTODO ESTÁTICO');
+//   console.log(classConstructor);
+//   console.log(nomeDoMetodo);
+//   console.log(descritorDePropriedade);
+//   console.log('###');
+
+//   // Retorno pode ser omitido
+//   return {
+//     // Use get/set OU value
+//     enumerable: true,
+//     configurable: true,
+//   };
+// }
+
+// // Parâmetro de método
+// function decoradorDeParametroDeMetodo(
+//   prototipoDaClasse: any,
+//   nomeDoMetodo: string,
+//   indiceDaPropriedade: number,
+// ): any {
+//   // Chamado na criação do método
+//   console.log('PARÂMETRO DE MÉTODO');
+//   console.log(prototipoDaClasse);
+//   console.log(nomeDoMetodo);
+//   console.log(indiceDaPropriedade);
+//   console.log('###');
+
+//   // Retorno é ignorado
+// }
+
+// // Parâmetro de método estático
+// function decoradorDeParametroDeMetodoEstatico(
+//   classConstructor: Constructor,
+//   nomeDoMetodo: string,
+//   indiceDaPropriedade: number,
+// ): any {
+//   // Chamado na criação do parâmetro (não precisa chamar o método)
+//   console.log('PARÂMETRO DE MÉTODO ESTÁTICO');
+//   console.log(classConstructor);
+//   console.log(nomeDoMetodo);
+//   console.log(indiceDaPropriedade);
+//   console.log('###');
+
+//   // Retorno é ignorado
+// }
+
+// // Propriedade
+// function decoradorDePropriedade(
+//   prototipoDaClasse: any,
+//   nomePropriedade: string,
+// ): any {
+//   // Chamado na criação da propriedade
+//   console.log('DECORADOR DE PROPRIEDADE');
+//   console.log(prototipoDaClasse);
+//   console.log(nomePropriedade);
+//   console.log('###');
+
+//   // Retorno pode ser omitido
+//   // Use get e set para manipular o valor da propriedade
+//   let valorPropriedade: any;
+//   return {
+//     enumerable: true,
+//     configurable: true,
+//     get: () => valorPropriedade,
+//     set: (valor: any) => {
+//       if (typeof valor === 'string') {
+//         valorPropriedade = valor.split('').reverse().join('');
+//         return;
+//       }
+//       valorPropriedade = valor;
+//     },
+//   };
+// }
+
+// // Propriedade estática
+// function decoradorDePropriedadeEstatica(
+//   classConstructor: any,
+//   nomePropriedade: string,
+// ): any {
+//   // Chamado na criação da propriedade estática
+//   console.log('DECORADOR DE PROPRIEDADE ESTÁTICA');
+//   console.log(classConstructor);
+//   console.log(nomePropriedade);
+//   console.log('###');
+
+//   // Retorno pode ser omitido
+//   return {
+//     // Use get/set OU value
+//     enumerable: true,
+//     configurable: true,
+//   };
+// }
+
+// // Getter/Setter
+// function decoradorDeGetterESetterNormal(
+//   prototipoDaClasse: any,
+//   nomePropriedade: string,
+//   descritorDePropriedade: PropertyDescriptor,
+// ): any {
+//   // Chamado na criação do método
+//   // (só pode ser aplicado no getter ou no setter - não em ambos)
+//   console.log('GETTER/SETTER normal');
+//   console.log(prototipoDaClasse);
+//   console.log(nomePropriedade);
+//   console.log(descritorDePropriedade);
+//   console.log('###');
+
+//   // Retorno pode ser omitido
+//   return {
+//     // Use get/set OU value
+//     enumerable: true,
+//     configurable: true,
+//   };
+// }
+
+// // Getter/Setter estático
+// function decoradorDeGetterESetterEstatico(
+//   classConstructor: Constructor,
+//   nomePropriedade: string,
+//   descritorDePropriedade: PropertyDescriptor,
+// ): any {
+//   // Chamado na criação do método
+//   // (só pode ser aplicado no getter ou no setter - não em ambos)
+//   console.log('GETTER/SETTER estático');
+//   console.log(classConstructor);
+//   console.log(nomePropriedade);
+//   console.log(descritorDePropriedade);
+//   console.log('###');
+
+//   // Retorno pode ser omitido
+//   return {
+//     // Use get/set OU value
+//     enumerable: true,
+//     configurable: true,
+//   };
+// }
+
+// // A classe e o uso dos decorators
+
+// @decoradorDeClasse
+// export class UmaPessoa {
+//   @decoradorDePropriedade
+//   nome: string;
+//   sobrenome: string;
+//   idade: number;
+
+//   @decoradorDePropriedadeEstatica
+//   static propriedadeEstatica = 'VALOR PROPRIEDADE ESTÁTICA';
+
+//   constructor(nome: string, sobrenome: string, idade: number) {
+//     this.nome = nome;
+//     this.sobrenome = sobrenome;
+//     this.idade = idade;
+//   }
+
+//   @decoradorDeMetodo
+//   metodo(@decoradorDeParametroDeMetodo msg: string): string {
+//     return `${this.nome} ${this.sobrenome}: ${msg}`;
+//   }
+
+//   @decoradorDeMetodoEstatico
+//   static metodoEstatico(
+//     @decoradorDeParametroDeMetodoEstatico msg: string,
+//   ): string {
+//     return UmaPessoa.propriedadeEstatica + ' - ' + msg;
+//   }
+
+//   get nomeCompleto(): string {
+//     return this.nome + ' ' + this.sobrenome;
+//   }
+
+//   @decoradorDeGetterESetterNormal
+//   set nomeCompleto(valor: string) {
+//     const palavras = valor.split(/\s+/g);
+//     const primeiroNome = palavras.shift();
+//     if (!primeiroNome) return;
+//     this.nome = primeiroNome;
+//     this.sobrenome = palavras.join(' ');
+//   }
+
+//   @decoradorDeGetterESetterEstatico
+//   static get staticPropertyGetterSetter(): string {
+//     return UmaPessoa.propriedadeEstatica;
+//   }
+
+//   static set staticPropertyGetterSetter(value: string) {
+//     UmaPessoa.propriedadeEstatica = value;
+//   }
+// }
+
+// // Uso da classe
+
+// const pessoa = new UmaPessoa('Luiz', 'Otávio', 30);
+// pessoa.nomeCompleto = 'João Silva Oliveira';
+// const metodo = pessoa.metodo('Olá mundo!');
+// const metodoEstatico = UmaPessoa.metodoEstatico('Olá mundo!');
+// console.log(pessoa);
+// console.log(metodo);
+// console.log(metodoEstatico);
+// console.log(UmaPessoa.propriedadeEstatica);
+// eslint-disable-next-line @typescript-eslint/no-namespace, @typescript-eslint/triple-slash-reference
+// /// <reference path="mdule.ts" />
+// console.log(AppNamespace.OtherNamespace.test);
+// import { sum } from './modulo';
+// console.log(sum(1, 3) as number);
+// import validator from 'validator';
+// import _ from './lodash-extensions';
+
+// console.log(_.clone([1, 2, 3, 4, 5]));
+// console.log(_.mul([3, 4, 5]));
