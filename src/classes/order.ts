@@ -1,16 +1,16 @@
-import { Messages } from '../services/messages';
-import { OrderRepository } from '../services/order-repository';
-import { ShoppingCart } from './shopping-cart';
 import { OrderStatus } from '../types/order-status';
 import { CustomerOrder } from '../interfaces/customer-protocol';
+import { ShoppingCartProtocol } from '../interfaces/shopping-cart-protocol';
+import { MessagesProtocol } from '../interfaces/messages-protocol';
+import { OrderRepositoryProtocol } from '../interfaces/order-repository-protocol';
 
 export class Order {
   private _orderStatus: OrderStatus = 'open';
 
   constructor(
-    private readonly cart: ShoppingCart,
-    private readonly messages: Messages,
-    private readonly repository: OrderRepository,
+    private readonly cart: ShoppingCartProtocol,
+    private readonly messages: MessagesProtocol,
+    private readonly repository: OrderRepositoryProtocol,
     private readonly customer: CustomerOrder,
   ) {}
 
