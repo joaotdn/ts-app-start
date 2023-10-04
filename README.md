@@ -15,3 +15,6 @@
 - Aumento do código
 - Tenha cuidado com: YAGNI (You arent gonna need it), KISS (keep it simple, stupid!)
 - Tempo de desenvolvimento aumenta muito
+
+## Jest Tests
+
